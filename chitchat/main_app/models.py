@@ -6,3 +6,12 @@ import datetime
 class Post(models.Model):
     text = models.CharField(max_length=250)
     created_at = models.DateTimeField(default= datetime.datetime.now())
+
+class Comment(models.Model):
+    comment = models.TextField()
+    created_at = models.DateTimeField(default= datetime.datetime.now())
+
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.comment
