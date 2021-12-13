@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from .forms import UserRegistrForm
 from django.contrib.auth.decorators import login_required
+from .models import Post
 
 # Create your views here.
     
@@ -17,7 +18,8 @@ def login(request):
 
 
 def home(request):
-  return render(request, 'home.html')
+  posts = Post.objects.all()
+  return render(request, 'home.html', {'posts': posts})
 
 
 def post(request):
