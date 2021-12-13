@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from django.views.generic.edit import CreateView
 
 urlpatterns = [
 
@@ -13,5 +14,5 @@ urlpatterns = [
   path('chitchat/', views.chitchat_index, name='index'),
   path('accounts/signup/', views.signup, name='signup'),
   path('post/<int:post_id>/', views.post, name='post'),
-  
+  path('post/create/', views.PostCreate.as_view(), name='post_create'),
 ]

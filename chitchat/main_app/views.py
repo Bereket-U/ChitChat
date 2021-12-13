@@ -3,8 +3,14 @@ from django.contrib.auth import login
 from .forms import UserRegistrForm
 from django.contrib.auth.decorators import login_required
 from .models import Post
+from django.views.generic import CreateView
 
 # Create your views here.
+
+class PostCreate(CreateView):
+  model = Post
+  fields = ['text']
+  success_url = '/home/'
     
 @login_required
 def chitchat_index(request):
