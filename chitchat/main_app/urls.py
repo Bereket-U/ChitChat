@@ -13,5 +13,6 @@ urlpatterns = [
   path('comment-confirm-delete/', views.comment_confirm_delete, name='comment_confirm_delete'),
   path('chitchat/', views.chitchat_index, name='index'),
   path('accounts/signup/', views.signup, name='signup'),
+#   path('accounts/login/', views.login, name='login'),
   
 ]
