@@ -9,6 +9,8 @@ from django.contrib.auth.decorators import login_required
 def chitchat_index(request):
     return render(request, 'chitchat/index.html')
 
+def landing(request):
+  return redirect('login')
 
 def login(request):
   return render(request, 'registration/login.html')
