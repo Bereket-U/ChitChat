@@ -11,7 +11,7 @@ def chitchat_index(request):
 
 
 def login(request):
-  return render(request, 'login.html')
+  return render(request, 'registration/login.html')
 
 
 def home(request):
@@ -27,15 +27,15 @@ def profile(request):
 
 
 def edit_post(request):
-  return render(request, 'edit_post.html')
+  return render(request, 'posts/edit_post.html')
 
 
 def post_confirm_delete(request):
-  return render(request, 'post_confirm_delete.html')
+  return render(request, 'posts/post_confirm_delete.html')
 
 
 def comment_confirm_delete(request):
-  return render(request, 'comment_confirm_delete.html')
+  return render(request, 'posts/comment_confirm_delete.html')
 
 def signup(request):
     error_message = ''
@@ -44,7 +44,7 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('index')
+            return redirect('home')
         else:
             error_message = 'Invalid sign up - try again'
     form = UserRegistrForm()

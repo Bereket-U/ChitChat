@@ -1,4 +1,6 @@
-<<<<<<< HEAD
+{% extends 'base.html' %}
+{% block content %}
+
 <h1>Sign Up</h1>
 
 {% if error_message %}
@@ -9,11 +11,6 @@
   {% csrf_token %} {{ form.as_p }}
   <input type="submit" class="btn" value="signup" />
 </form>
-=======
-{% extends 'base.html' %}
-{% block content %}
-
-
 
 {% endblock %}
->>>>>>> f9ee6970429d61acc679b0203f39874b2436bbd9
+
