@@ -10,7 +10,11 @@ from django.views.generic import CreateView
 class PostCreate(CreateView):
   model = Post
   fields = ['text']
-  success_url = '/home/'
+  
+  def form_valid(self, form):
+    form.instance.user = self.request.user 
+    return super().form_valid(form)
+
     
 @login_required
 def chitchat_index(request):
