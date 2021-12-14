@@ -13,6 +13,10 @@
             <p>{{ post.created_at }}</p>
           </div>
         </a>
+        <div class="card-action">
+          <a href="{% url 'post_update' post.id %}">Edit</a>
+          <a href="{% url 'post_delete' post.id %}">Delete</a>
+        </div>
       </div>
       {% endfor %}
     </div>
