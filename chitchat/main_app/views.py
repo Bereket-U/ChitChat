@@ -4,7 +4,6 @@ from .forms import UserRegistrForm, CommentForm
 from django.contrib.auth.decorators import login_required
 from .models import Post, Comment, Photo
 from django.views.generic import CreateView, UpdateView, DeleteView
-from .forms import CommentForm
 import uuid
 import boto3
 
