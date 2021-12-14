@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from .forms import UserRegistrForm
 from django.contrib.auth.decorators import login_required
-from .models import Post
-from django.views.generic import CreateView
+from .models import Post, Comment
+from django.views.generic import CreateView, DeleteView
 from .forms import CommentForm
 
 
@@ -78,3 +78,9 @@ def signup(request):
     form = UserRegistrForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
+
+
+def CommentDelete(request, comment_id, post_id):
+    Comment.objects.filter(id=comment_id).delete()
+    return redirect('post', post_id=post_id)
+
