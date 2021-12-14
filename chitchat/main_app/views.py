@@ -33,10 +33,6 @@ def chitchat_index(request):
 def landing(request):
   return redirect('login')
 
-def login(request):
-  return render(request, 'registration/login.html')
-
-
 def home(request):
   posts = Post.objects.all()
   return render(request, 'home.html', {'posts': posts})
