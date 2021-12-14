@@ -2,11 +2,29 @@ from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import login
 from .forms import UserRegistrForm, CommentForm
 from django.contrib.auth.decorators import login_required
-from .models import Post, Comment
+from .models import Post, Comment, Photo
 from django.views.generic import CreateView, UpdateView, DeleteView
+import uuid
+import boto3
 
+S3_BASE_URL = 'https://s3.us-east-2.amazonaws.com/'
+BUCKET = 'chitchat'
 
 # Create your views here.
+
+def add_photo(request, post_id):
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        try:
+            s3.upload_fileobj(photo_file, BUCKET, key)
+            url = f"{S3_BASE_URL}{BUCKET}/{key}"
+            photo = Photo(url=url, post_id=post_id)
+            photo.save()
+        except:
+            print('An error occurred uploading file to S3')
+    return redirect('post', post_id=post_id)
 
 class PostCreate(CreateView):
   model = Post
