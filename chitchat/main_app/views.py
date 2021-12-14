@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import login
-from .forms import UserRegistrForm
+from .forms import UserRegistrForm, CommentForm
 from django.contrib.auth.decorators import login_required
-from .models import Post, Photo
-from django.views.generic import CreateView
+from .models import Post, Comment, Photo
+from django.views.generic import CreateView, UpdateView, DeleteView
 from .forms import CommentForm
 import uuid
 import boto3
@@ -35,17 +35,24 @@ class PostCreate(CreateView):
     form.instance.user = self.request.user 
     return super().form_valid(form)
 
-    
+class PostUpdate(UpdateView):
+  model = Post
+  fields = ['text']
+
+class PostDelete(DeleteView):
+  model = Post
+  success_url = '/profile/'
+
+class CommentUpdate(UpdateView):
+    model = Comment
+    fields = ['comment']
+ 
 @login_required
 def chitchat_index(request):
     return render(request, 'chitchat/index.html')
 
 def landing(request):
   return redirect('login')
-
-def login(request):
-  return render(request, 'registration/login.html')
-
 
 def home(request):
   posts = Post.objects.all()
@@ -57,11 +64,12 @@ def post(request, post_id):
   comment_form = CommentForm()
   return render(request, 'posts/detail.html', { 'post': post, 'comment_form': comment_form })
 
-def add_comment(request, post_id):
+def add_comment(request, post_id, user_id):
   form = CommentForm(request.POST)
   if form.is_valid():
     new_comment = form.save(commit=False)
     new_comment.post_id = post_id
+    new_comment.user_id = user_id
     new_comment.save()
   return redirect('post', post_id=post_id)
 
@@ -95,3 +103,9 @@ def signup(request):
     form = UserRegistrForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
+
+
+def CommentDelete(request, comment_id, post_id):
+    Comment.objects.filter(id=comment_id).delete()
+    return redirect('post', post_id=post_id)
+
