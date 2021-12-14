@@ -3,7 +3,7 @@ from django.contrib.auth import login
 from .forms import UserRegistrForm
 from django.contrib.auth.decorators import login_required
 from .models import Post
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView, DeleteView
 from .forms import CommentForm
 
 
@@ -16,6 +16,15 @@ class PostCreate(CreateView):
   def form_valid(self, form):
     form.instance.user = self.request.user 
     return super().form_valid(form)
+
+class PostUpdate(UpdateView):
+  model = Post
+  # Let's disallow the renaming of a cat by excluding the name field!
+  fields = ['text']
+
+class PostDelete(DeleteView):
+  model = Post
+  success_url = '/profile/'
 
     
 @login_required
