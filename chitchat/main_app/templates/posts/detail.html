@@ -16,6 +16,7 @@
 {% if comment.user.id == user.id %}
 
 <a href="{% url 'comment_delete' comment.id post.id %}">Delete</a>
+<a href="{% url 'comment_update' comment.id %}">Edit</a>
 
 {%endif %} {% endfor %}
 <div class="card">

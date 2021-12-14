@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import login
 from .forms import UserRegistrForm, CommentForm
 from django.contrib.auth.decorators import login_required
@@ -18,14 +18,16 @@ class PostCreate(CreateView):
 
 class PostUpdate(UpdateView):
   model = Post
-  # Let's disallow the renaming of a cat by excluding the name field!
   fields = ['text']
 
 class PostDelete(DeleteView):
   model = Post
   success_url = '/profile/'
 
-    
+class CommentUpdate(UpdateView):
+    model = Comment
+    fields = ['comment']
+ 
 @login_required
 def chitchat_index(request):
     return render(request, 'chitchat/index.html')
