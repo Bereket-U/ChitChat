@@ -24,9 +24,10 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.comment
-        
+      
     def get_absolute_url(self):
         return reverse('post', kwargs={'post_id': self.post.id})
+
 
 class Photo(models.Model):
     url = models.CharField(max_length=200)
