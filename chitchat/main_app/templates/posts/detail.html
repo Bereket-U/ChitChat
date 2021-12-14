@@ -16,7 +16,7 @@
 {% endfor %}
 <div class="card">
   <div class="card-content">
-    <form action="{% url 'add_comment' post.id %}" method="post">
+    <form action="{% url 'add_comment' post.id user.id %}" method="post">
       {% csrf_token %} {{ comment_form.as_p }}
       <input type="submit" class="btn" value="Add comment" />
     </form>

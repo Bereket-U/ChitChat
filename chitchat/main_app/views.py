@@ -39,11 +39,12 @@ def post(request, post_id):
   comment_form = CommentForm()
   return render(request, 'posts/detail.html', { 'post': post, 'comment_form': comment_form })
 
-def add_comment(request, post_id):
+def add_comment(request, post_id, user_id):
   form = CommentForm(request.POST)
   if form.is_valid():
     new_comment = form.save(commit=False)
     new_comment.post_id = post_id
+    new_comment.user_id = user_id
     new_comment.save()
   return redirect('post', post_id=post_id)
 
