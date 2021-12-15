@@ -135,7 +135,7 @@ class UserEditView(UpdateView):
 class PasswordsChangeView(PasswordChangeView):
     from_class = PasswordChangeForm
     template_name = 'main_app/change_password_form.html'
-    success_url = '/edit_profile/'
+    success_url = '/change_password_done/'
 
 class PasswordsChangeDoneView(PasswordChangeDoneView):
     template_name = 'main_app/change_password_done.html'
@@ -147,6 +147,5 @@ class PasswordsResetView(PasswordResetView):
 
 class PasswordsResetDoneView(PasswordResetDoneView):
     template_name = 'main_app/reset_password_done.html'
-  
     success_url = '/change_password_done/'
 
