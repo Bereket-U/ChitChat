@@ -6,6 +6,9 @@ from .models import Post, Comment, Photo
 from django.views.generic import CreateView, UpdateView, DeleteView
 import uuid
 import boto3
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.views import PasswordChangeView
+
 
 
 
@@ -129,3 +132,8 @@ class UserEditView(UpdateView):
 
     def get_object(self):
         return self.request.user
+
+class PasswordsChangeView(PasswordChangeView):
+    from_class = PasswordChangeForm
+    template_name = 'main_app/change_password_form.html'
+    success_url = '/edit_profile/'
