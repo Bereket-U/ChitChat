@@ -45,9 +45,29 @@ def post_create(request):
 
   return render(request, 'main_app/post_form.html', context)
   
-class PostUpdate(UpdateView):
-  model = Post
-  fields = ['text']
+# class PostUpdate(UpdateView):
+#   model = Post
+#   fields = ['text']
+
+def post_update(request, pk):
+  error_message = ''
+  print(pk)
+  
+  if request.method == 'POST':
+     p = Post.objects.get(id = pk)
+    #  p.text = request.post[text]
+    #  post_form = PostForm(request.POST)
+     post_form.instance.user_id = request.user.id
+     if post_form.is_valid():
+       post_form.save()
+       add_photo(request, pk)
+       return redirect('post', post_id = pk)
+  else:
+        error_message = 'Invalid Inputs'
+  post_form = PostForm()
+  context= {"post_form": post_form, 'post_id' : pk, 'error_message': error_message}
+  return render(request, 'main_app/update_post_form.html', context)
+
 
 class PostDelete(DeleteView):
   model = Post
