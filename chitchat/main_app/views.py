@@ -6,8 +6,8 @@ from .models import Post, Comment, Photo
 from django.views.generic import CreateView, UpdateView, DeleteView
 import uuid
 import boto3
-from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
+from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm
+from django.contrib.auth.views import PasswordChangeView, PasswordResetView, PasswordResetDoneView, PasswordChangeDoneView
 
 
 
@@ -29,7 +29,6 @@ def add_photo(request, post_id):
             photo.save()
         except:
             print('An error occurred uploading file to S3')
-    print('about to redirect and add photo')
     return redirect('post', post_id=post_id)
 
 def post_create(request):
@@ -140,3 +139,13 @@ class PasswordsChangeView(PasswordChangeView):
 
 class PasswordsChangeDoneView(PasswordChangeDoneView):
     template_name = 'main_app/change_password_done.html'
+
+class PasswordsResetView(PasswordResetView):
+    from_class = PasswordResetForm
+    template_name = 'main_app/reset_password_form.html'
+    success_url = '/reset_password_done/'
+
+class PasswordsResetDoneView(PasswordResetDoneView):
+    template_name = 'main_app/reset_password_done.html'
+    success_url = '/change_password_done/'
+
