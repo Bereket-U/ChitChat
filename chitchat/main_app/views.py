@@ -60,8 +60,8 @@ def post_update(request, pk):
   
   if request.method == 'POST':
      p = Post.objects.get(id = pk)
-    #  p.text = request.post[text]
-    #  post_form = PostForm(request.POST)
+    #  p.text = req.post[text]
+     post_form = PostForm(request.POST)
      post_form.instance.user_id = request.user.id
      if post_form.is_valid():
        post_form.save()
