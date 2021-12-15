@@ -24,7 +24,6 @@ def add_photo(request, post_id):
             photo.save()
         except:
             print('An error occurred uploading file to S3')
-    print('about to redirect and add photo')
     return redirect('post', post_id=post_id)
 
 def post_create(request):
