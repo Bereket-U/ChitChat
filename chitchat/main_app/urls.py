@@ -1,3 +1,4 @@
+from django.contrib import auth
 from django.urls import path
 from . import views
 from django.views.generic.edit import CreateView
@@ -22,4 +23,5 @@ urlpatterns = [
   path('post/<int:post_id>/add_photo/', views.add_photo, name='add_photo'),
   path('post/<int:pk>/update/', views.PostUpdate.as_view(), name='post_update'),
   path('post/<int:pk>/delete/', views.PostDelete.as_view(), name='post_delete'),
+  path('edit_profile/', views.UserEditView.as_view(), name='edit_profile'),
 ]

@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import login
-from .forms import UserRegistrForm, CommentForm, PostForm
+from .forms import UserRegistrForm, CommentForm, PostForm, UserUpdateForm
 from django.contrib.auth.decorators import login_required
 from .models import Post, Comment, Photo
 from django.views.generic import CreateView, UpdateView, DeleteView
 import uuid
 import boto3
+
+
 
 S3_BASE_URL = 'https://s3.us-east-2.amazonaws.com/'
 BUCKET = 'chitchat'
@@ -120,3 +122,10 @@ def CommentDelete(request, comment_id, post_id):
     Comment.objects.filter(id=comment_id).delete()
     return redirect('post', post_id=post_id)
 
+class UserEditView(UpdateView):
+    form_class = UserUpdateForm
+    template_name = 'main_app/edit_user_form.html'
+    success_url = '/edit_profile/'
+
+    def get_object(self):
+        return self.request.user
