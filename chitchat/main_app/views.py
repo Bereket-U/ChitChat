@@ -25,10 +25,15 @@ def add_photo(request, post_id):
         try:
             s3.upload_fileobj(photo_file, BUCKET, key)
             url = f"{S3_BASE_URL}{BUCKET}/{key}"
-            photo = Photo(url=url, post_id=post_id)
-            photo.save()
-        except:
-            print('An error occurred uploading file to S3')
+            if Photo.objects.filter(post_id = post_id).exists():
+              p = Photo.objects.get(post_id = post_id)
+              p.url = url
+              p.save()
+            else: 
+              photo = Photo(url=url, post_id=post_id)
+              photo.save()
+        except Exception as e:
+            print(e)
     return redirect('post', post_id=post_id)
 
 def post_create(request):
@@ -50,9 +55,27 @@ def post_create(request):
 
   return render(request, 'main_app/post_form.html', context)
   
-class PostUpdate(UpdateView):
-  model = Post
-  fields = ['text']
+# class PostUpdate(UpdateView):
+#   model = Post
+#   fields = ['text']
+
+def post_update(request, pk):
+  error_message = ''
+  print(pk)
+  
+  if request.method == 'POST':
+    p = Post.objects.get(id = pk)
+    print(request.POST['text'])
+    p.text = request.POST['text']
+    p.save()
+    add_photo(request, pk)
+    return redirect('post', post_id = pk)
+  else:
+    error_message = 'Invalid Inputs'
+  post_form = PostForm()
+  context= {"post_form": post_form, 'post_id' : pk, 'error_message': error_message}
+  return render(request, 'main_app/update_post_form.html', context)
+
 
 class PostDelete(DeleteView):
   model = Post
