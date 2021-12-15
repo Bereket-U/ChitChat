@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import login
-from .forms import UserRegistrForm, CommentForm
+from .forms import UserRegistrForm, CommentForm, PostForm
 from django.contrib.auth.decorators import login_required
 from .models import Post, Comment, Photo
 from django.views.generic import CreateView, UpdateView, DeleteView
@@ -24,16 +24,28 @@ def add_photo(request, post_id):
             photo.save()
         except:
             print('An error occurred uploading file to S3')
+    print('about to redirect and add photo')
     return redirect('post', post_id=post_id)
 
-class PostCreate(CreateView):
-  model = Post
-  fields = ['text']
+def post_create(request):
+  error_message = ''
 
-  def form_valid(self, form):
-    form.instance.user = self.request.user 
-    return super().form_valid(form)
+  if request.method == 'POST':
+    post_form = PostForm(request.POST)
+    if post_form.is_valid():
+      post_form.instance.user_id = request.user.id
+      post = post_form.save()
+      add_photo(request, post.id)
+      return redirect('post', post_id=post.id)
 
+  else:
+      error_message = 'Invalid Inputs'
+
+  post_form = PostForm()
+  context= {"post_form" : post_form, 'error_message': error_message}
+
+  return render(request, 'main_app/post_form.html', context)
+  
 class PostUpdate(UpdateView):
   model = Post
   fields = ['text']
