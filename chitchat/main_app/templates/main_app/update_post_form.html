@@ -1,7 +1,7 @@
 {% extends 'base.html' %} 
 {% block content %}
 
-<form action="{% url 'post_create'%}" enctype="multipart/form-data" method="post">
+<form action="{% url 'post_update' post_id %}" enctype="multipart/form-data" method="post">
   {% csrf_token %}
   <input type="file" name="photo-file">
   <p>{{ post_form.as_p }}</p>
@@ -9,5 +9,3 @@
 </form>
 
 {% endblock %}
-
-
