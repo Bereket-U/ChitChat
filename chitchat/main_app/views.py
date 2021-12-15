@@ -6,8 +6,8 @@ from .models import Post, Comment, Photo
 from django.views.generic import CreateView, UpdateView, DeleteView
 import uuid
 import boto3
-from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth.views import PasswordChangeView
+from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm
+from django.contrib.auth.views import PasswordChangeView, PasswordResetView, PasswordResetDoneView
 
 
 
@@ -137,3 +137,12 @@ class PasswordsChangeView(PasswordChangeView):
     from_class = PasswordChangeForm
     template_name = 'main_app/change_password_form.html'
     success_url = '/edit_profile/'
+
+class PasswordsResetView(PasswordResetView):
+    from_class = PasswordResetForm
+    template_name = 'main_app/reset_password_form.html'
+    success_url = '/reset_password_done/'
+
+class PasswordsResetDoneView(PasswordResetDoneView):
+    template_name = 'main_app/reset_password_done.html'
+  
