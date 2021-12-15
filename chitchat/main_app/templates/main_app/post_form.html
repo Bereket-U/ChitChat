@@ -1,7 +1,13 @@
-{% extends 'base.html' %} {% block content %}
-<form action="" method="post">
+{% extends 'base.html' %} 
+{% block content %}
+
+<form action="{% url 'post_create' %}" enctype="multipart/form-data" method="post">
   {% csrf_token %}
-  <p>{{ form.as_p }}</p>
+  <input type="file" name="photo-file">
+  <p>{{ post_form.as_p }}</p>
   <input type="submit" value="Submit!" class="btn" />
 </form>
+
 {% endblock %}
+
+
