@@ -21,3 +21,11 @@ class PostForm(ModelForm):
   class Meta:
     model = Post
     fields = ['text']
+
+
+class UserUpdateForm(ModelForm):
+    email = forms.EmailField()
+    
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name', 'email']
