@@ -7,7 +7,7 @@ from django.views.generic import CreateView, UpdateView, DeleteView
 import uuid
 import boto3
 from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth.views import PasswordChangeView
+from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
 
 
 
@@ -136,4 +136,7 @@ class UserEditView(UpdateView):
 class PasswordsChangeView(PasswordChangeView):
     from_class = PasswordChangeForm
     template_name = 'main_app/change_password_form.html'
-    success_url = '/edit_profile/'
+    success_url = '/change_password_done/'
+
+class PasswordsChangeDoneView(PasswordChangeDoneView):
+    template_name = 'main_app/change_password_done.html'
