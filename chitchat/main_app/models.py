@@ -7,6 +7,7 @@ from django.urls import reverse
 class Post(models.Model):
     text = models.CharField(max_length=250)
     created_at = models.DateTimeField(default= datetime.datetime.now())
+    # profile = models.ForeignKey()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -39,6 +40,8 @@ class Photo(models.Model):
 
 class ProfilePicture(models.Model):
     url = models.CharField(max_length=200)
+    bio = models.TextField(max_length=250)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    
     def __str__(self):
         return f"user_id: {self.user_id} @{self.url}"

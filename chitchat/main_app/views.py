@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import login
-from .forms import UserRegistrForm, CommentForm, PostForm, UserUpdateForm, UpdateComment
+from .forms import UserRegistrForm, CommentForm, PostForm, UserUpdateForm, UpdateComment, ProfileForm
 from django.contrib.auth.decorators import login_required
 from .models import Post, Comment, Photo, ProfilePicture
 from django.views.generic import CreateView, UpdateView, DeleteView
@@ -94,7 +94,9 @@ def landing(request):
 
 def home(request):
   posts = Post.objects.all()
-  return render(request, 'home.html', {'posts': posts})
+  profile = ProfilePicture.objects.get(user_id=request.user)
+  print(profile)
+  return render(request, 'home.html', {'posts': posts, 'profile' : profile})
 
 
 def post(request, post_id):
@@ -149,6 +151,12 @@ def CommentDelete(request, comment_id, post_id):
 
 
 def add_profile_picture(request, user_id):
+    profile_form = ProfileForm(request.POST)
+    print('profile form', profile_form)
+    if profile_form.is_valid():
+       profile_form.instance.user_id = request.user.id
+       profile = profile_form.save()
+       print('profile', profile)
     photo_file = request.FILES.get('photo-file', None)
     if photo_file:
         s3 = boto3.client('s3')
@@ -157,11 +165,12 @@ def add_profile_picture(request, user_id):
             s3.upload_fileobj(photo_file, BUCKET, key)
             url = f"{S3_BASE_URL}{BUCKET}/{key}"
             if ProfilePicture.objects.filter(user_id = user_id).exists():
-              profile = ProfilePicture.objects.get(user_id = user_id)
+              # profile = ProfilePicture.objects.get(user_id = user_id)
               profile.url = url
-              profile.save()
+              d = profile.save()
+              print('added photo', d)
             else: 
-              photo = ProfilePicture(url=url, user_id=user_id)
+              photo = ProfilePicture(url=url, user_id=user_id, bio = '')
               photo.save()
         except Exception as e:
             print(e)

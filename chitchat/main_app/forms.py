@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm, widgets
-from .models import Comment, Post
+from .models import Comment, Post, ProfilePicture
 
 
 class UserRegistrForm(UserCreationForm):
@@ -34,3 +34,8 @@ class UserUpdateForm(ModelForm):
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name', 'email']
+
+class ProfileForm(ModelForm):
+  class Meta:
+    model = ProfilePicture
+    fields = ['bio']
