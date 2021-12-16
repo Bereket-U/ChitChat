@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import login
 from .forms import UserRegistrForm, CommentForm, PostForm, UserUpdateForm
 from django.contrib.auth.decorators import login_required
-from .models import Post, Comment, Photo
+from .models import Post, Comment, Photo, ProfilePicture
 from django.views.generic import CreateView, UpdateView, DeleteView
 import uuid
 import boto3
@@ -146,6 +146,26 @@ def signup(request):
 def CommentDelete(request, comment_id, post_id):
     Comment.objects.filter(id=comment_id).delete()
     return redirect('post', post_id=post_id)
+
+
+def add_profile_picture(request, user_id):
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        try:
+            s3.upload_fileobj(photo_file, BUCKET, key)
+            url = f"{S3_BASE_URL}{BUCKET}/{key}"
+            if ProfilePicture.objects.filter(user_id = user_id).exists():
+              profile = ProfilePicture.objects.get(user_id = user_id)
+              profile.url = url
+              profile.save()
+            else: 
+              photo = ProfilePicture(url=url, user_id=user_id)
+              photo.save()
+        except Exception as e:
+            print(e)
+    return redirect('edit_profile')
 
 class UserEditView(UpdateView):
     form_class = UserUpdateForm
