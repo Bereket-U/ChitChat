@@ -84,7 +84,13 @@ input {
 }
 
 a {
-  text-decoration: none;
+  color: black;
+  text-decoration: none !important;
+}
+
+a:hover {
+  color: black;
+  text-decoration: none !important;
 }
 
 .container {
