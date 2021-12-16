@@ -28,5 +28,6 @@ urlpatterns = [
   path('change_password_done/', views.PasswordsChangeDoneView.as_view(), name='change_password_done'),
   path('reset_password/', views.PasswordsResetView.as_view(), name='reset_password'),
   path('reset_password_done/', views.PasswordsResetDoneView.as_view(), name='reset_password_done'),
+  path('user/<int:user_id>/add_profile_picture/', views.add_profile_picture, name='add_profile_picture'),
   
 ]
