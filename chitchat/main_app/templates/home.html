@@ -1,25 +1,43 @@
-{% extends 'base.html' %} {% block content %}
-
-<h1>Home</h1>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 
 <div class="container">
   <div class="row">
-    <div class="col-sm">One of three columns</div>
-    <div class="col-sm">
+    <div class="col-sm" id="frozen-col">
+      <p style="margin-top: 20px;">
+        My Profile
+      </p>
+      <div style="display: flex; justify-content: center;">
+        <img src="https://i.imgur.com/BA92CRh.jpg" id="profile-pic">
+      </div>
+        <div>
+          <p>bio:</p>
+          <p>Hi! My name is Kioko and I am a huge weeb and kpop stan... yes I am depressed.</p>
+          <p style="margin-top: 100px;">Followers:</p>
+       </div>
+    </div>
+    <div class="col-sm" id="scroll-col">
       {% for post in posts %}
       <div class="card">
+      <div class="card-content">
+        <p>
+          <img src="https://i.imgur.com/BA92CRh.jpg" id="profile-post-pic">
+          kiokomay
+        </p>
+        <hr/>
         <a href="/post/{{ post.id }}">
-          <div class="card-content">
-            <p>{{ post.text }}</p>
-            <p>{{ post.created_at }}</p>
+            <p style="margin-left: 15px; text-decoration: none;">{{ post.text }}</p>
+            {% for photo in post.photo_set.all %}
+            <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+              <img class="responsive-img card-panel" src="{{photo.url}}" style="max-width:70%;" alt="Responsive image">
+            </div>
+            <p style="font-size: 12px; margin-left: 15px">posted {{ post.created_at }}</p>
+            {% endfor %}
           </div>
-        </a>
-      </div>
-
-      {% endfor %}
+      </a>
     </div>
-    <div class="col-sm">One of three columns</div>
-  </div>
-</div>
+      {% endfor %}
 
-{% endblock %}
+      {% endblock %}
+      
