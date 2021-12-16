@@ -17,6 +17,11 @@ class CommentForm(ModelForm):
     model = Comment
     fields = ['comment']
 
+class UpdateComment(ModelForm):
+  class Meta:
+    model = Comment
+    fields = ['comment']
+    
 class PostForm(ModelForm):
   class Meta:
     model = Post
