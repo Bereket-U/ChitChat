@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import login
-from .forms import UserRegistrForm, CommentForm, PostForm, UserUpdateForm
+from .forms import UserRegistrForm, CommentForm, PostForm, UserUpdateForm, UpdateComment
 from django.contrib.auth.decorators import login_required
 from .models import Post, Comment, Photo, ProfilePicture
 from django.views.generic import CreateView, UpdateView, DeleteView
@@ -83,7 +83,7 @@ class PostDelete(DeleteView):
 
 class CommentUpdate(UpdateView):
     model = Comment
-    fields = ['comment']
+    form_class = UpdateComment
  
 @login_required
 def chitchat_index(request):
