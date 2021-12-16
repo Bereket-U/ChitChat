@@ -19,6 +19,7 @@
           {% csrf_token %}
           <div class="form-group">
             <input type="file" class="" name="photo-file" />
+            <input type="text" name="bio" placeholder="enter bio"/>
             <br /><br />
             <button type="submit" class="buttonSolid btn-block" value="">
               Update Photo
@@ -29,7 +30,7 @@
     </div>
     <div class="col">
       <div class="form">
-        <h2>User Informaition</h2>
+        <h2>User Information</h2>
 
         {% if error_message %}
         <p class="red-text">{{ error_message }}</p>

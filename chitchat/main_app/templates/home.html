@@ -9,12 +9,12 @@
         My Profile
       </p>
       <div style="display: flex; justify-content: center;">
-        <img src="https://i.imgur.com/BA92CRh.jpg" id="profile-pic">
+
+        <img src="{{profile.url}}" id="profile-pic">
       </div>
         <div>
           <p>bio:</p>
-          <p>Hi! My name is Kioko and I am a huge weeb and kpop stan... yes I am depressed.</p>
-          <p style="margin-top: 100px;">Followers:</p>
+          <p>{{profile.bio}}</p>
        </div>
     </div>
     <div class="col-sm" id="scroll-col">
@@ -22,11 +22,11 @@
       <div class="card">
       <div class="card-content">
         <p>
-          <img src="https://i.imgur.com/BA92CRh.jpg" id="profile-post-pic">
-          kiokomay
+          <img src="{{profile.url}}" id="profile-post-pic">
+            @{{post.user.username}}
         </p>
         <hr/>
-        <a href="/post/{{ post.id }}">
+        <a href="/post/{{ post.id }}" class="post-card">
             <p style="margin-left: 15px; text-decoration: none;">{{ post.text }}</p>
             {% for photo in post.photo_set.all %}
             <div style="display: flex; justify-content: center; margin-bottom: 20px;">
