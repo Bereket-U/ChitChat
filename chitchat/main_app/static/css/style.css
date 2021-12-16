@@ -83,3 +83,55 @@ a {
   width: 70%;
   margin-top: 20px;
 }
+.card {
+  width: 300px;
+}
+
+hr {
+  margin-top: 10px;
+}
+
+#frozen-col {
+  top: 76px;
+  position: sticky;
+  z-index: 20;
+  background-color: #c7deff;
+  margin-right: 30px;
+  max-height: 630px;
+  text-align: center;
+  border-style: solid;
+  border-width: 3px;
+}
+
+#scroll-col {
+  top: -20px;
+  background-color: #c7deff;
+  margin-top: 24px;
+  border-style: solid;
+  border-width: 3px;
+}
+
+#frozen-header {
+  top: 0;
+  position: sticky;
+  z-index: 20;
+}
+
+.card {
+  min-width: 400px;
+  margin: 20px 50px 20px 50px;
+  padding: 15px 15px 15px 15px;
+  border-style: groove;
+  border-width: 3px;
+}
+
+#profile-pic {
+  max-width: 100px;
+  border-radius: 50%;
+  margin-bottom: 30px;
+}
+
+#profile-post-pic {
+  max-width: 40px;
+  border-radius: 50%;
+}
