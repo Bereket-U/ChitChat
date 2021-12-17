@@ -6,8 +6,9 @@
       <div class="other">
         <div class="form">
           <h2 class="text-center">Profile Picture</h2>
-          {% for photo in user.profilepicture_set.all %}
           <div class="text-center">
+            {% for photo in user.profilepicture_set.all %}
+
             <img class="profile-img" src="{{photo.url}}" />
             {% empty %}
             <img class="profile-img" src="../../static/image/default.png" />
@@ -21,7 +22,9 @@
           >
             {% csrf_token %}
             <div class="form-group">
-              <input type="text" name="bio" placeholder="enter bio" />
+              <input type="text" name="bio" placeholder="Enter bio" />
+            </div>
+            <div class="form-group">
               <div class="custom-file">
                 <input
                   type="file"
@@ -34,11 +37,11 @@
                   >Choose file</label
                 >
               </div>
-              <br /><br />
-              <button type="submit" class="buttonSolid btn-block" value="">
-                Update Photo
-              </button>
             </div>
+
+            <button type="submit" class="buttonSolid btn-block" value="">
+              Update Photo
+            </button>
           </form>
         </div>
       </div>
