@@ -5,8 +5,12 @@
     <div class="col">
       <div class="post-box">
         <div class="post">
-          <img class="post-profile-pic" src="" />
-          @{{ post.user.username}}
+          {% for photo in post.user.profilepicture_set.all %}
+          <img class="post-profile-pic" src="{{photo.url}}" />
+          {% empty %}
+          <img class="post-profile-pic" src="../../static/image/default.png" />
+          {% endfor %}
+        @{{ post.user.username}}
           <hr />
           {% for photo in post.photo_set.all %}
           <p>{{ post.text }}</p>
@@ -30,7 +34,7 @@
               {% for comment in post.comment_set.all %}
               {% if comment.user.id == user.id %}
               <tr>
-                <th>{{ comment.comment }}</th>
+                <td>{{ comment.comment }}</td>
                 <td><small>{{ comment.created_at }}</small></td>
                 <td>
                <small><a href="{% url 'comment_delete' comment.id post.id %}"><button class="buttonDelete"> X </button></a></small> 
