@@ -1,6 +1,5 @@
 {% extends 'base.html' %} {% block content %}
 
-
 <h1 class="registration-header">Login</h1>
 
 <div class="box">
@@ -25,7 +24,9 @@
           forget your password ?</a
         >
         <input type="hidden" name="next" value="{{ next }}" />
-        <p style="text-align: center;">Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
+        <p style="text-align: center">
+          Don't have an account? <a href="{% url 'signup' %}">Signup</a>
+        </p>
       </form>
     </div>
   </div>
