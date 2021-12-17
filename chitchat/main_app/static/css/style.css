@@ -194,3 +194,8 @@ hr {
   background: linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
   background-color: #ffab23;
 }
+
+.logoText {
+  font-family: "Indie Flower", cursive;
+  font-weight: 100px;
+}
