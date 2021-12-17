@@ -1,11 +1,42 @@
 {% extends 'base.html' %} 
 {% block content %}
 
-<form action="{% url 'post_update' post_id %}" enctype="multipart/form-data" method="post">
-  {% csrf_token %}
-  <input type="file" name="photo-file">
-  <p>{{ post_form.as_p }}</p>
-  <input type="submit" value="Submit!" class="btn" />
-</form>
+<div class="box">
+  <div class="form-container">
+    <div class="form">
+      <h2>Edit Post</h2>
+      <form
+        action="{% url 'post_update' post_id %}"
+        enctype="multipart/form-data"
+        method="post"
+      >
+        {% csrf_token %}
+
+        <p class="form-group">{{ post_form.as_p }}</p>
+
+        <div class="input-group">
+          <div class="custom-file">
+            <input
+              type="file"
+              class="custom-file-input"
+              id="inputGroupFile04"
+              aria-describedby="inputGroupFileAddon04"
+              name="photo-file"
+            />
+            <label class="custom-file-label" for="inputGroupFile04"
+              >Choose file</label
+            >
+          </div>
+        </div>
+        <br />
+
+        <button type="submit" value="Submit!" class="buttonSolid btn-block">
+          Edit
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
+
