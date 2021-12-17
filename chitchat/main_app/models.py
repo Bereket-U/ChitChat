@@ -10,6 +10,9 @@ class Post(models.Model):
     # profile = models.ForeignKey()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    class Meta:
+        ordering = ['-created_at']
+
     def __str__(self):
         return self.text
 
