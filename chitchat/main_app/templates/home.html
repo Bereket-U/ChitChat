@@ -40,6 +40,8 @@
               {% for photo in post.photo_set.all %}
                 <img class="post-photo" src="{{photo.url}}">
         
+
+                
               <p>Posted {{ post.created_at }}</p>
               {% endfor %}
             </div>
