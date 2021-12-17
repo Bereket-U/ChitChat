@@ -154,4 +154,64 @@ hr {
 .nav-item {
   color: black;
 }
+
+.my-profile {
+  text-align: center;
+}
+
+.bio-tag {
   margin-top: 20px;
+  text-align: center;
+}
+
+.bio {
+  margin: 0 auto;
+  max-width: 400px;
+  text-align: center;
+}
+
+.profile-content {
+  text-align: center;
+}
+
+.fixed-bio {
+  top: 95px;
+  max-width: 600px;
+}
+
+.post-box{
+  margin-top: 20px;
+  margin-bottom: 10px;
+  max-width: 600px;
+}
+
+.change-position {
+  position: relative;
+}
+
+.posted-at {
+  margin-top: 20px;
+  margin-bottom: 0;
+  font-size: 13px;
+}
+
+.edit-btn {
+  margin: 0;
+  position: absolute;
+  right: 40%;
+}
+
+.delete-btn {
+  margin: 0;
+  position: absolute;
+  left: 40%;
+}
+
+.card-action {
+  min-height: 50px;
+  margin-bottom: 15px;
+}
+
+.profile-bio {
+  max-width: 600px;
+}
