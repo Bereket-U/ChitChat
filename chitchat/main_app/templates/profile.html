@@ -1,26 +1,54 @@
-{% extends 'base.html' %} {% block content %}
-
-<h1>Home</h1>
+{% extends 'base.html' %} 
+{% load static %}
+{% block content %}
 
 <div class="container">
   <div class="row">
     <div class="col-sm">
+      <div class="other profile-bio mx-auto change-position">
+        <div class="profile-content">
+            <p class="my-profile">
+              My Profile
+            </p>
+            <div class="text-center">
+              {% for photo in user.profilepicture_set.all %}
+                <img class="bio-profile-pic" src="{{profile.url}}" />
+                {% empty %}
+                <img class="bio-profile-pic" src="../../static/image/default.png" />
+                {% endfor %}
+
+            </div>
+            
+            <div>
+                <p class="bio-tag">Bio:</p>
+                <p class="bio">{{profile.bio}}</p>
+            </div>
+        </div>
+      </div>
       {% for post in posts %}
-      <div class="card">
+      <div class="post-box mx-auto">
         <a href="/post/{{ post.id }}">
-          <div class="card-content">
+          <div class="card-content post">
             <p>{{ post.text }}</p>
-            <p>{{ post.created_at }}</p>
+            {% for photo in post.photo_set.all %}
+              <img class="post-photo" src="{{photo.url}}">
+            {% endfor %}
+            
+            <p class="posted-at">posted {{ post.created_at }}</p>
           </div>
         </a>
         <div class="card-action">
-          <a href="{% url 'post_update' post.id %}">Edit</a>
-          <a href="{% url 'post_delete' post.id %}">Delete</a>
+          <hr/>
+          <button class="edit-btn">
+            <a href="{% url 'post_update' post.id %}">Edit</a>
+          </button>
+          <button class="delete-btn">
+            <a href="{% url 'post_delete' post.id %}">Delete</a>
+          </button>
         </div>
       </div>
       {% endfor %}
     </div>
-    <div class="col-sm">One of three columns</div>
   </div>
 </div>
 

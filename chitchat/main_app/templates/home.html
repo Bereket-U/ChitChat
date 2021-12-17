@@ -6,8 +6,8 @@
   <div class="row">
     <div class="col" >
       <div class="other fixed-bio">
-        <div class="form">
-            <p>
+        <div class="profile-content">
+            <p class="my-profile">
               My Profile
             </p>
             <div class="text-center">
@@ -16,13 +16,11 @@
                 {% empty %}
                 <img class="bio-profile-pic" src="../../static/image/default.png" />
                 {% endfor %}
-
             </div>
             
             <div>
-                <p>Bio:</p>
-                <p>Hi! My name is Kioko and I am a huge weeb and kpop stan... yes I am depressed.</p>
-                <p style="margin-top: 100px;">Followers:</p>
+                <p class="bio-tag">Bio:</p>
+                <p class="bio">{{profile.bio}}</p>
             </div>
         </div>
       </div>
@@ -42,7 +40,7 @@
         
 
                 
-              <p>Posted {{ post.created_at }}</p>
+              <p class="posted-at">posted {{ post.created_at }}</p>
               {% endfor %}
             </div>
           </a>

@@ -115,8 +115,9 @@ def add_comment(request, post_id, user_id):
 
 def profile(request):
     posts = Post.objects.filter(user=request.user)
+    profile = ProfilePicture.objects.get(user_id=request.user)
     
-    return render(request, 'profile.html', {'posts': posts})
+    return render(request, 'profile.html', {'posts': posts, 'profile': profile})
 
 
 def edit_post(request):
