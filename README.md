@@ -14,7 +14,7 @@ ChitChat is a simple forum/social media clone where users can sign up, edit thei
 
 ## Technologies
 
-This project was made using Python, Django, PSQL, HTML, CSS, and BootStrap.
+This project was made using Python, Django, PSQL, HTML, CSS, BootStrap, and AWS S3 Buckets.
 
 ## Getting Started
 
