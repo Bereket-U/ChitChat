@@ -8,7 +8,7 @@ import uuid
 import boto3
 from django.contrib.auth.forms import PasswordChangeForm, PasswordResetForm
 from django.contrib.auth.views import PasswordChangeView, PasswordResetView, PasswordResetDoneView, PasswordChangeDoneView
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 
@@ -16,7 +16,7 @@ S3_BASE_URL = 'https://s3.us-east-2.amazonaws.com/'
 BUCKET = 'chitchat'
 
 # Create your views here.
-
+@login_required
 def add_photo(request, post_id):
     photo_file = request.FILES.get('photo-file', None)
     if photo_file:
@@ -36,6 +36,7 @@ def add_photo(request, post_id):
             print(e)
     return redirect('post', post_id=post_id)
 
+@login_required
 def post_create(request):
   error_message = ''
 
@@ -59,6 +60,7 @@ def post_create(request):
 #   model = Post
 #   fields = ['text']
 
+@login_required
 def post_update(request, pk):
   error_message = ''
   print(pk)
@@ -77,11 +79,11 @@ def post_update(request, pk):
   return render(request, 'main_app/update_post_form.html', context)
 
 
-class PostDelete(DeleteView):
+class PostDelete(LoginRequiredMixin, DeleteView):
   model = Post
   success_url = '/profile/'
 
-class CommentUpdate(UpdateView):
+class CommentUpdate(LoginRequiredMixin, UpdateView):
     model = Comment
     form_class = UpdateComment
  
@@ -89,21 +91,24 @@ class CommentUpdate(UpdateView):
 def chitchat_index(request):
     return render(request, 'chitchat/index.html')
 
+@login_required
 def landing(request):
   return redirect('login')
 
+@login_required
 def home(request):
   posts = Post.objects.all()
   profile = ProfilePicture.objects.get(user_id=request.user)
   print(profile)
   return render(request, 'home.html', {'posts': posts, 'profile' : profile})
 
-
+@login_required
 def post(request, post_id):
   post = Post.objects.get(id=post_id)
   comment_form = CommentForm()
   return render(request, 'posts/detail.html', { 'post': post, 'comment_form': comment_form })
 
+@login_required
 def add_comment(request, post_id, user_id):
   form = CommentForm(request.POST)
   if form.is_valid():
@@ -113,24 +118,26 @@ def add_comment(request, post_id, user_id):
     new_comment.save()
   return redirect('post', post_id=post_id)
 
+@login_required
 def profile(request):
     posts = Post.objects.filter(user=request.user)
     profile = ProfilePicture.objects.get(user_id=request.user)
     
     return render(request, 'profile.html', {'posts': posts, 'profile': profile})
 
-
+@login_required
 def edit_post(request):
   return render(request, 'posts/edit_post.html')
 
-
+@login_required
 def post_confirm_delete(request):
   return render(request, 'posts/post_confirm_delete.html')
 
-
+@login_required
 def comment_confirm_delete(request):
   return render(request, 'posts/comment_confirm_delete.html')
 
+@login_required
 def signup(request):
     error_message = ''
     if request.method == 'POST':
@@ -148,11 +155,12 @@ def signup(request):
     return render(request, 'registration/signup.html', context)
 
 
+@login_required
 def CommentDelete(request, comment_id, post_id):
     Comment.objects.filter(id=comment_id).delete()
     return redirect('post', post_id=post_id)
 
-
+@login_required
 def add_profile_picture(request, user_id):
     profile_form = ProfileForm(request.POST)
     print('profile form', profile_form)
@@ -179,7 +187,7 @@ def add_profile_picture(request, user_id):
             print(e)
     return redirect('edit_profile')
 
-class UserEditView(UpdateView):
+class UserEditView(LoginRequiredMixin, UpdateView):
     form_class = UserUpdateForm
     template_name = 'main_app/edit_user_form.html'
     success_url = '/edit_profile/'
@@ -187,20 +195,20 @@ class UserEditView(UpdateView):
     def get_object(self):
         return self.request.user
 
-class PasswordsChangeView(PasswordChangeView):
+class PasswordsChangeView(LoginRequiredMixin, PasswordChangeView):
     from_class = PasswordChangeForm
     template_name = 'main_app/change_password_form.html'
     success_url = '/change_password_done/'
 
-class PasswordsChangeDoneView(PasswordChangeDoneView):
+class PasswordsChangeDoneView(LoginRequiredMixin, PasswordChangeDoneView):
     template_name = 'main_app/change_password_done.html'
 
-class PasswordsResetView(PasswordResetView):
+class PasswordsResetView(LoginRequiredMixin, PasswordResetView):
     from_class = PasswordResetForm
     template_name = 'main_app/reset_password_form.html'
     success_url = '/reset_password_done/'
 
-class PasswordsResetDoneView(PasswordResetDoneView):
+class PasswordsResetDoneView(LoginRequiredMixin, PasswordResetDoneView):
     template_name = 'main_app/reset_password_done.html'
     success_url = '/change_password_done/'
 
