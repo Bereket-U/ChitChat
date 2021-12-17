@@ -149,8 +149,6 @@ def signup(request):
         else:
             error_message = 'Invalid sign up - try again'
     form = UserRegistrForm()
-    # except ProfilePicture.DoesNotExist:
-    #     return None
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
