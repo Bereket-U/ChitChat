@@ -98,9 +98,7 @@ def landing(request):
 @login_required
 def home(request):
   posts = Post.objects.all()
-  profile = ProfilePicture.objects.get(user_id=request.user)
-  print(profile)
-  return render(request, 'home.html', {'posts': posts, 'profile' : profile})
+  return render(request, 'home.html', {'posts': posts})
 
 @login_required
 def post(request, post_id):
@@ -121,9 +119,8 @@ def add_comment(request, post_id, user_id):
 @login_required
 def profile(request):
     posts = Post.objects.filter(user=request.user)
-    profile = ProfilePicture.objects.get(user_id=request.user)
     
-    return render(request, 'profile.html', {'posts': posts, 'profile': profile})
+    return render(request, 'profile.html', {'posts': posts})
 
 @login_required
 def edit_post(request):
@@ -137,7 +134,6 @@ def post_confirm_delete(request):
 def comment_confirm_delete(request):
   return render(request, 'posts/comment_confirm_delete.html')
 
-@login_required
 def signup(request):
     error_message = ''
     if request.method == 'POST':

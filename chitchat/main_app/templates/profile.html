@@ -1,28 +1,31 @@
-{% extends 'base.html' %} 
-{% load static %}
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block content %}
 
 <div class="container">
   <div class="row">
     <div class="col-sm">
       <div class="other profile-bio mx-auto change-position">
         <div class="profile-content">
-            <p class="my-profile">
-              My Profile
-            </p>
-            <div class="text-center">
-              {% for photo in user.profilepicture_set.all %}
-                <img class="bio-profile-pic" src="{{profile.url}}" />
-                {% empty %}
-                <img class="bio-profile-pic" src="../../static/image/default.png" />
-                {% endfor %}
-
-            </div>
-            
-            <div>
-                <p class="bio-tag">Bio:</p>
-                <p class="bio">{{profile.bio}}</p>
-            </div>
+          <p class="my-profile">My Profile</p>
+          <div class="text-center">
+            {% for photo in user.profilepicture_set.all %}
+            <img class="bio-profile-pic" src="{{photo.url}}" />
+            {% empty %}
+            <img class="bio-profile-pic" src="../../static/image/default.png" />
+            {% endfor %}
+          </div>
+          <div>
+            {% for bio in user.profilepicture_set.all %}
+            <p class="bio-tag">Bio: {{bio.bio}}</p>
+            <a class="" href="{% url 'edit_profile' %}"
+              ><button class="buttonSolid">Update Profile</button></a
+            >
+            {% empty %}
+            <p class="bio-tag">Bio: You have no bio</p>
+            <a class="" href="{% url 'edit_profile' %}"
+              ><button class="buttonSolid">Add Profile</button></a
+            >
+            {% endfor %}
+          </div>
         </div>
       </div>
       {% for post in posts %}
@@ -31,14 +34,14 @@
           <div class="card-content post">
             <p>{{ post.text }}</p>
             {% for photo in post.photo_set.all %}
-              <img class="post-photo" src="{{photo.url}}">
+            <img class="post-photo" src="{{photo.url}}" />
             {% endfor %}
-            
+
             <p class="posted-at">posted {{ post.created_at }}</p>
           </div>
         </a>
         <div class="card-action">
-          <hr/>
+          <hr />
           <button class="edit-btn">
             <a href="{% url 'post_update' post.id %}">Edit</a>
           </button>

@@ -12,15 +12,20 @@
             </p>
             <div class="text-center">
               {% for photo in user.profilepicture_set.all %}
-                <img class="bio-profile-pic" src="{{profile.url}}" />
+                <img class="bio-profile-pic" src="{{photo.url}}" />
                 {% empty %}
                 <img class="bio-profile-pic" src="../../static/image/default.png" />
                 {% endfor %}
             </div>
             
             <div>
-                <p class="bio-tag">Bio:</p>
-                <p class="bio">{{profile.bio}}</p>
+              {% for bio in user.profilepicture_set.all %}
+              <p class="bio-tag">Bio: {{bio.bio}}</p>
+              <a class="" href="{% url 'edit_profile' %}"><button class="buttonSolid">Update Profile</button></a>
+              {% empty %}
+              <p class="bio-tag">Bio: You have no bio</p>
+              <a class="" href="{% url 'edit_profile' %}"><button class="buttonSolid">Update Profile</button></a>
+              {% endfor %}
             </div>
         </div>
       </div>
@@ -30,7 +35,11 @@
       {% for post in posts %}
       <div class="post-box">
         <div class="post">
-            <img class="post-profile-pic" src="">
+            {% for photo in post.user.profilepicture_set.all %}
+              <img class="post-profile-pic" src="{{photo.url}}" />
+              {% empty %}
+              <img class="post-profile-pic" src="../../static/image/default.png" />
+              {% endfor %}
             @{{ post.user.username}}
           <hr/>
           <a href="/post/{{ post.id }}">
@@ -45,7 +54,6 @@
             </div>
           </a>
         </div>
-        <br>
         {% endfor %}
        
       </div>

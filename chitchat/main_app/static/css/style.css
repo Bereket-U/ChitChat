@@ -10,7 +10,7 @@ body {
 }
 .form-container {
   display: flex;
-  background-color: #f5f5f5;
+  background-color: #f6f9ff;
   align-items: center;
   padding-top: 40px;
   padding-bottom: 40px;
@@ -23,7 +23,7 @@ body {
   align-items: center;
   padding-top: 40px;
   padding-bottom: 40px;
-  background-color: #e3edff;
+  background-color: #f6f9ff;
   align-content: center;
   border-radius: 2%;
   border: 1px solid rgba(212, 212, 212, 0.829);
@@ -40,7 +40,7 @@ body {
 }
 .post-box {
   align-items: center;
-  background-color: #e3edff;
+  background-color: #f6f9ff;
   border: 1px solid rgba(212, 212, 212, 0.829);
   align-content: center;
   border-radius: 2%;
@@ -58,7 +58,7 @@ body {
 }
 .post-profile-pic {
   width: 40px;
-  max-width: 40px;
+  height: 40px;
   border-radius: 100%;
 }
 
@@ -199,7 +199,6 @@ hr {
   font-family: "Indie Flower", cursive;
   font-weight: 100px;
 }
-=======
 .my-profile {
   text-align: center;
 }
@@ -224,7 +223,7 @@ hr {
   max-width: 600px;
 }
 
-.post-box{
+.post-box {
   margin-top: 20px;
   margin-bottom: 10px;
   max-width: 600px;
@@ -271,15 +270,15 @@ hr {
 }
 
 .confirm-dlt-btn {
-  display:inline-block;
+  display: inline-block;
   margin: 0;
   position: absolute;
   top: 50%;
   left: 40%;
-  }
+}
 
 .cancel-btn {
-  display:inline-block;
+  display: inline-block;
   margin: 0;
   position: absolute;
   top: 50%;
@@ -290,9 +289,5 @@ hr {
 .registration-header {
   text-align: center;
   margin-top: 30px;
-}
-
-.hello-msg {
-  text-align: center;
 }
 
