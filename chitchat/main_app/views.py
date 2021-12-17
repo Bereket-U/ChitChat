@@ -136,7 +136,6 @@ def post_confirm_delete(request):
 def comment_confirm_delete(request):
   return render(request, 'posts/comment_confirm_delete.html')
 
-@login_required
 def signup(request):
     error_message = ''
     if request.method == 'POST':
