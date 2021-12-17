@@ -20,7 +20,7 @@ This project was made using Python, Django, PSQL, HTML, CSS, BootStrap, and AWS 
 
 ### Link to the Website
 
-https:
+https://git.heroku.com/chitchat-sei.git
 
 ### How the Game Works
 
