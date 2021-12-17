@@ -6,8 +6,9 @@
       <div class="other">
         <div class="form">
           <h2 class="text-center">Profile Picture</h2>
-          {% for photo in user.profilepicture_set.all %}
           <div class="text-center">
+            {% for photo in user.profilepicture_set.all %}
+
             <img class="profile-img" src="{{photo.url}}" />
             {% empty %}
             <img class="profile-img" src="../../static/image/default.png" />
