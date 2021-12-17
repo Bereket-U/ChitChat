@@ -7,10 +7,12 @@
         <div class="form">
           <h2 class="text-center">Profile Picture</h2>
           {% for photo in user.profilepicture_set.all %}
-          <img class="profile-img" src="{{photo.url}}" />
-          {% empty %}
-          <img class="profile-img" src="../../static/image/default.png" />
-          {% endfor %}
+          <div class="text-center">
+            <img class="profile-img" src="{{photo.url}}" />
+            {% empty %}
+            <img class="profile-img" src="../../static/image/default.png" />
+            {% endfor %}
+          </div>
           <br /><br />
           <form
             action="{% url 'add_profile_picture' user.id %}"
