@@ -32,6 +32,5 @@ In the future I think it would be cool to add:
 
 - a "like" feature on each post
 - the ability to follow other users and filter the timeline by users you follow
-- profile picture display on the users posts
 - the ability to repost other users posts to your own profile
 - see what words are trending in other users posts
