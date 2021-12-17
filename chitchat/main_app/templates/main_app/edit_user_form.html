@@ -2,49 +2,66 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md">
-      <div class="form">
-        <h2>Profile Picture</h2>
-        {% for photo in user.profilepicture_set.all %}
-        <img class="profile-img" src="{{photo.url}}" />
-        {% empty %}
-        <img class="profile-img" src="../../static/image/default.png" />
-        {% endfor %}
-        <br /><br />
-        <form
-          action="{% url 'add_profile_picture' user.id %}"
-          enctype="multipart/form-data"
-          method="POST"
-        >
-          {% csrf_token %}
-          <div class="form-group">
-            <input type="file" class="" name="photo-file" />
-            <input type="text" name="bio" placeholder="enter bio"/>
-            <br /><br />
-            <button type="submit" class="buttonSolid btn-block" value="">
-              Update Photo
-            </button>
+    <div class="col">
+      <div class="other">
+        <div class="form">
+          <h2 class="text-center">Profile Picture</h2>
+          {% for photo in user.profilepicture_set.all %}
+          <div class="text-center">
+            <img class="profile-img" src="{{photo.url}}" />
+            {% empty %}
+            <img class="profile-img" src="../../static/image/default.png" />
+            {% endfor %}
           </div>
-        </form>
+          <br /><br />
+          <form
+            action="{% url 'add_profile_picture' user.id %}"
+            enctype="multipart/form-data"
+            method="POST"
+          >
+            {% csrf_token %}
+            <div class="form-group">
+              <input type="text" name="bio" placeholder="enter bio" />
+              <div class="custom-file">
+                <input
+                  type="file"
+                  class="custom-file-input"
+                  id="inputGroupFile04"
+                  aria-describedby="inputGroupFileAddon04"
+                  name="photo-file"
+                />
+                <label class="custom-file-label" for="inputGroupFile04"
+                  >Choose file</label
+                >
+              </div>
+              <br /><br />
+              <button type="submit" class="buttonSolid btn-block" value="">
+                Update Photo
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
     <div class="col">
-      <div class="form">
-        <h2>User Information</h2>
+      <div class="other">
+        <div class="form">
+          <h2 class="text-center">User Informaition</h2>
 
-        {% if error_message %}
-        <p class="red-text">{{ error_message }}</p>
-        {% endif %}
+          {% if error_message %}
+          <p class="red-text">{{ error_message }}</p>
+          {% endif %}
 
-        <form method="post" action="">
-          {% csrf_token %} {{ form.as_p }}
-          <button type="submit" class="buttonSolid btn-block" value="">
-            Update
-          </button>
-        </form>
+          <form method="post" action="">
+            {% csrf_token %} {{ form.as_p }}
+            <button type="submit" class="buttonSolid btn-block" value="">
+              Update
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-{% endblock %}
+  {% endblock %}
+</div>

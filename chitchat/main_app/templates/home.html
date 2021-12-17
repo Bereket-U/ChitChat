@@ -4,39 +4,54 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-sm" id="frozen-col">
-      <p style="margin-top: 20px;">
-        My Profile
-      </p>
-      <div style="display: flex; justify-content: center;">
+    <div class="col" >
+      <div class="other fixed-bio">
+        <div class="form">
+            <p>
+              My Profile
+            </p>
+            <div class="text-center">
+              {% for photo in user.profilepicture_set.all %}
+                <img class="bio-profile-pic" src="{{profile.url}}" />
+                {% empty %}
+                <img class="bio-profile-pic" src="../../static/image/default.png" />
+                {% endfor %}
 
-        <img src="{{profile.url}}" id="profile-pic">
-      </div>
-        <div>
-          <p>bio:</p>
-          <p>{{profile.bio}}</p>
-       </div>
-    </div>
-    <div class="col-sm" id="scroll-col">
-      {% for post in posts %}
-      <div class="card">
-      <div class="card-content">
-        <p>
-            @{{post.user.username}}
-        </p>
-        <hr/>
-        <a href="/post/{{ post.id }}" class="post-card">
-            <p style="margin-left: 15px; text-decoration: none;">{{ post.text }}</p>
-            {% for photo in post.photo_set.all %}
-            <div style="display: flex; justify-content: center; margin-bottom: 20px;">
-              <img class="responsive-img card-panel" src="{{photo.url}}" style="max-width:70%;" alt="Responsive image">
             </div>
-            <p style="font-size: 12px; margin-left: 15px">posted {{ post.created_at }}</p>
-            {% endfor %}
-          </div>
-      </a>
+            
+            <div>
+                <p>Bio:</p>
+                <p>Hi! My name is Kioko and I am a huge weeb and kpop stan... yes I am depressed.</p>
+                <p style="margin-top: 100px;">Followers:</p>
+            </div>
+        </div>
+      </div>
     </div>
-      {% endfor %}
 
-      {% endblock %}
+    <div class="col-md">
+      {% for post in posts %}
+      <div class="post-box">
+        <div class="post">
+            <img class="post-profile-pic" src="">
+            @{{ post.user.username}}
+          <hr/>
+          <a href="/post/{{ post.id }}">
+            <p >{{ post.text }}</p>
+              {% for photo in post.photo_set.all %}
+                <img class="post-photo" src="{{photo.url}}">
+        
+              <p>Posted {{ post.created_at }}</p>
+              {% endfor %}
+            </div>
+          </a>
+        </div>
+        <br>
+        {% endfor %}
+       
+      </div>
+        
+    </div>
+  </div>
+</div>
+ {% endblock %}
       
