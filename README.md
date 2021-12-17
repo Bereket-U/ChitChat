@@ -6,11 +6,11 @@ ChitChat is a simple forum/social media clone where users can sign up, edit thei
 
 ## Screenshots
 
-![alt text](https://i.imgur.com/0ch5ULh.png)
+![alt text](https://i.imgur.com/yAl7H0l.png)
 
-![alt text](https://i.imgur.com/uFQcGTd.png)
+![alt text](https://i.imgur.com/6oFC3d4.png)
 
-![alt text](https://i.imgur.com/b3cRZgB.png)
+![alt text](https://i.imgur.com/iV0Od8t.png)
 
 ## Technologies
 
@@ -18,7 +18,7 @@ This project was made using Python, Django, PSQL, HTML, CSS, and BootStrap.
 
 ## Getting Started
 
-### Link to the Game
+### Link to the Website
 
 https:
 
