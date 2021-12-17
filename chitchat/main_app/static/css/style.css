@@ -10,6 +10,7 @@ body {
 }
 .form-container {
   display: flex;
+  background-color: #f5f5f5;
   align-items: center;
   padding-top: 40px;
   padding-bottom: 40px;
@@ -81,6 +82,16 @@ input {
   color: #666666;
   padding: 4px 10px;
 }
+.form textarea {
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid #dcdcdc;
+  display: inline-block;
+  color: #666666;
+  padding: 4px 10px;
+  height: 60px;
+}
+
 .buttonSolid {
   background-color: #44c767;
   border-radius: 28px;
@@ -143,7 +154,7 @@ hr {
 }
 .bio-profile-pic {
   width: 100px;
-  max-width: 100px;
+  height: 100px;
   border-radius: 100%;
   align-content: center;
 }
@@ -153,4 +164,33 @@ hr {
 
 .nav-item {
   color: black;
+}
+
+.buttonDelete {
+  background-color: #e4685d;
+  border-radius: 4px;
+  border: 1px solid #ffffff;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 10px;
+  text-decoration: none;
+}
+.buttonDelete:hover {
+  background-color: #eb675e;
+}
+
+.buttonEdit {
+  background-color: #ffec64;
+  border-radius: 4px;
+  border: 1px solid #ffaa22;
+  display: inline-block;
+  cursor: pointer;
+  color: #333333;
+  font-size: 10px;
+  text-decoration: none;
+}
+.buttonEdit:hover {
+  background: linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
+  background-color: #ffab23;
 }
