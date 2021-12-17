@@ -93,7 +93,7 @@ def chitchat_index(request):
 
 @login_required
 def landing(request):
-  return redirect('login')
+  return redirect('home')
 
 @login_required
 def home(request):
